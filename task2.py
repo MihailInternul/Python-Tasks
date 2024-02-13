@@ -1,3 +1,5 @@
+# Given a list of integers. Remove duplicates from the list and create a tuple. Find the minimum and maximum number.
+
 def find_min_max(numbers):
     unique_numbers = tuple(set(numbers))
 
