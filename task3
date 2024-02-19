@@ -1,0 +1,43 @@
+# Create a script that reads the access log from a file.
+# The name of the file is provided as an argument.
+# An output of the script should provide the total number of different User Agents
+# and then provide statistics with the number of requests from each of them.
+# Here is a link to an example access.log file.
+
+import sys
+from collections import defaultdict
+
+def read_access_log(log_file):
+    user_agents = defaultdict(int)
+
+    # Read the access log file line by line
+    with open(log_file, 'r') as file:
+        for line in file:
+            # Extract User-Agent from each log entry
+            user_agent = line.split('"')[5]
+            user_agents[user_agent] += 1
+
+    return user_agents
+
+def main():
+    # Check if the log file name is provided as an argument
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <log_file>")
+        sys.exit(1)
+
+    log_file = sys.argv[1]
+
+    # Read access log and get statistics
+    user_agents = read_access_log(log_file)
+
+    # Total number of different User Agents
+    total_user_agents = len(user_agents)
+    print("Total number of different User Agents:", total_user_agents)
+
+    # Statistics with the number of requests from each User Agent
+    print("\nUser Agent Statistics:")
+    for user_agent, requests in user_agents.items():
+        print(f"{user_agent}: {requests} requests")
+
+if __name__ == "__main__":
+    main()
